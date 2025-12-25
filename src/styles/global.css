@@ -111,9 +111,7 @@ h2 { font-size: 26px; letter-spacing: -0.02em; }
 }
 
 .beyondThumb:focus-visible {
-  outline: 2px solid rgba(124, 58, 237, 0.7);
-  outline-offset: 2px;
-  border-radius: 14px;
+  outline: none;
 }
 
 .beyondImage {
@@ -131,8 +129,7 @@ h2 { font-size: 26px; letter-spacing: -0.02em; }
 .beyondThumb:hover .beyondImage { opacity: 1; }
 
 @media (hover: hover) and (pointer: fine) {
-  .beyondThumb:hover,
-  .beyondThumb:focus-visible {
+  .beyondThumb:hover {
     height: 175px;
     width: 100%;
   }
@@ -182,7 +179,7 @@ h2 { font-size: 26px; letter-spacing: -0.02em; }
 }
 
 .projectCard:hover {
-  border-color: rgba(124, 58, 237, 0.45);
+  border-color: rgba(255, 255, 255, 0.45);
 }
 
 .projectCard:focus-visible {

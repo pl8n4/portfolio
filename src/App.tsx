@@ -1,4 +1,4 @@
-import aboutImage from './assets/IMG_7034 2.jpg';
+import aboutImage from './assets/headshot.jpg';
 import mriPosterPdf from './assets/mri_poster.pdf';
 import beyondArgentinaImage from './assets/arg.jpg';
 import beyondSoccerImage from './assets/soccer.jpg';
@@ -21,7 +21,7 @@ function App() {
       description:
         'End-to-end pipeline that processes multimodal MRI data and trains predictive models to estimate nicotine dependence.',
       details:
-        'As part of Professor Satish Nair\'s lab and alongside a PhD student, I worked on applying machine learning to study the neural correlates of nicotine dependence. The project focused on using multimodal MRI data to better understand how structural and functional brain features relate to addiction severity, and whether combining these modalities could improve predictive performance.\n\nWe showed that non-linear models such as SVMs and random forests consistently outperformed traditional GLM-based analyses, while also uncovering additional brain regions linked to addiction through model agnostic feature importance methods. These results suggest that standard linear approaches misses meaningful structure in neuroimaging data.\n\nBuilding on this, we are exploring more detailed feature importance analyses to better understand how predictive signals are distributed across brain regions and subjects. We are also expending the dataset to improve statistical power and model stability, and investigating latent space representations. Through this we aim to move beyond prediction alone toward deeper interpretability and generalization.  ',
+        'As part of Professor Satish Nair\'s lab and alongside a PhD student, I worked on applying machine learning to study the neural correlates of nicotine dependence. The project focused on using multimodal MRI data to better understand how structural and functional brain features relate to addiction severity, and whether combining these modalities could improve predictive performance.\n\nWe showed that non-linear models such as SVMs and random forests consistently outperformed traditional GLM-based analyses, while also uncovering additional brain regions linked to addiction through model agnostic feature importance methods. These results suggest that standard linear approaches miss meaningful structure in neuroimaging data.\n\nBuilding on this, we are exploring more detailed feature importance analyses to better understand how predictive signals are distributed across brain regions and subjects. We are also expanding the dataset to improve statistical power and model stability, and investigating latent space representations. Through this, we aim to move beyond prediction alone toward deeper interpretability and generalization.  ',
       links: [{ label: 'SfN 2025 poster (PDF)', href: mriPosterPdf }],
     },
     {
@@ -63,32 +63,36 @@ function App() {
   const closeBeyondPreview = () => setBeyondPreviewSrc(null);
 
   useEffect(() => {
-    if (!activeProject) return;
+    if (!activeProject && !beyondPreviewSrc) return;
 
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') closeProject();
+      if (e.key === 'Escape') {
+        closeProject();
+        closeBeyondPreview();
+      }
     };
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [activeProject]);
+  }, [activeProject, beyondPreviewSrc]);
 
   useEffect(() => {
-    if (!activeProject) return;
+    if (!activeProject && !beyondPreviewSrc) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     return () => {
       document.body.style.overflow = previousOverflow;
     };
-  }, [activeProject]);
+  }, [activeProject, beyondPreviewSrc]);
 
   useEffect(() => {
     if (activeProject) {
       closeButtonRef.current?.focus();
       return;
     }
+    if (beyondPreviewSrc) return;
     lastFocusRef.current?.focus?.();
-  }, [activeProject]);
+  }, [activeProject, beyondPreviewSrc]);
 
   useEffect(() => {
     setEmbeddedHref(null);
@@ -181,7 +185,10 @@ function App() {
               <button
                 type="button"
                 className="beyondThumb"
-                onClick={() => setBeyondPreviewSrc(beyondArgentinaImage)}
+                onClick={(e) => {
+                  lastFocusRef.current = e.currentTarget;
+                  setBeyondPreviewSrc(beyondArgentinaImage);
+                }}
                 aria-label="Open Argentina photo"
               >
                 <img className="beyondImage" src={beyondArgentinaImage} alt="Argentina" loading="lazy" decoding="async" />
@@ -198,7 +205,10 @@ function App() {
               <button
                 type="button"
                 className="beyondThumb"
-                onClick={() => setBeyondPreviewSrc(beyondSoccerImage)}
+                onClick={(e) => {
+                  lastFocusRef.current = e.currentTarget;
+                  setBeyondPreviewSrc(beyondSoccerImage);
+                }}
                 aria-label="Open soccer photo"
               >
                 <img className="beyondImage" src={beyondSoccerImage} alt="Soccer" loading="lazy" decoding="async" />
@@ -207,7 +217,7 @@ function App() {
               <p className="muted" style={{ margin: 0 }}>
                 My English Premier League app wasn't just a coding exercise, it was born from a genuine obsession with
                 the game. If it's Saturday morning, I'm probably watching the Premier League or my favorite team,
-                Barcelona.
+                FC Barcelona.
               </p>
             </article>
 
@@ -215,7 +225,10 @@ function App() {
               <button
                 type="button"
                 className="beyondThumb"
-                onClick={() => setBeyondPreviewSrc(beyondSkiImage)}
+                onClick={(e) => {
+                  lastFocusRef.current = e.currentTarget;
+                  setBeyondPreviewSrc(beyondSkiImage);
+                }}
                 aria-label="Open ski photo"
               >
                 <img className="beyondImage" src={beyondSkiImage} alt="Skiing" loading="lazy" decoding="async" />
@@ -237,6 +250,7 @@ function App() {
             <span className="chip">Coffee</span>
             <span className="chip">Cooking</span>
             <span className="chip">Asado</span>
+            <span className="chip">Skiing</span>
 
           </div>
 
