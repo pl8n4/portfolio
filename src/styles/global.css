@@ -1,0 +1,304 @@
+:root {
+  /* spacing */
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+
+  /* layout */
+  --max-width: 1040px;
+  --radius: 16px;
+
+  /* typography */
+  --text: 16px;
+  --leading: 1.5;
+
+  /* colors */
+  --bg: #0b0d12;
+  --panel: #101521;
+  --text-primary: #eef2ff;
+  --text-secondary: rgba(238, 242, 255, 0.72);
+  --border: rgba(238, 242, 255, 0.10);
+  --accent: #7c3aed;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  font-size: var(--text);
+  line-height: var(--leading);
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4);
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.muted { color: var(--text-secondary); }
+
+h1, h2, h3 { margin: 0; line-height: 1.1; }
+h1 { font-size: 44px; letter-spacing: -0.03em; }
+h2 { font-size: 26px; letter-spacing: -0.02em; }
+
+.aboutLayout {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.beyondCard {
+  padding: 16px;
+}
+
+.beyondSection {
+  position: relative;
+}
+
+.beyondThumb {
+  width: 88%;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: zoom-in;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  height: 140px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: width 180ms ease, height 180ms ease;
+}
+
+.beyondThumb:focus-visible {
+  outline: 2px solid rgba(124, 58, 237, 0.7);
+  outline-offset: 2px;
+  border-radius: 14px;
+}
+
+.beyondImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  margin: 0;
+  opacity: 0.95;
+  transition: opacity 180ms ease;
+  display: block;
+}
+
+.beyondThumb:hover .beyondImage { opacity: 1; }
+
+@media (hover: hover) and (pointer: fine) {
+  .beyondThumb:hover,
+  .beyondThumb:focus-visible {
+    height: 175px;
+    width: 100%;
+  }
+
+  .beyondThumb:hover .beyondImage {
+    transform: none;
+  }
+}
+
+.beyondModalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: rgba(0, 0, 0, 0.55);
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+
+.beyondModal {
+  width: min(720px, 100%);
+  max-height: 70vh;
+  overflow: auto;
+  padding: 16px;
+  position: relative;
+}
+
+.beyondModalImg {
+  width: 100%;
+  max-height: 62vh;
+  height: auto;
+  object-fit: contain;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.projectCard {
+  width: 100%;
+  padding: 16px;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.projectCard:hover {
+  border-color: rgba(124, 58, 237, 0.45);
+}
+
+.projectCard:focus-visible {
+  outline: 2px solid rgba(124, 58, 237, 0.7);
+  outline-offset: 2px;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.modal {
+  width: min(880px, 100%);
+  max-height: min(90vh, 920px);
+  overflow: auto;
+  padding: 24px;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.modalClose {
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-primary);
+  padding: 6px 10px;
+  line-height: 1;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modalClose:hover {
+  border-color: rgba(124, 58, 237, 0.45);
+}
+
+.modalDetails {
+  white-space: pre-line;
+}
+
+.modalLinks {
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.modalLinkPill {
+  appearance: none;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 10px;
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.modalLinkPill:hover {
+  border-color: rgba(124, 58, 237, 0.45);
+  text-decoration: none;
+}
+
+.pdfEmbed {
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.pdfFrame {
+  width: 100%;
+  height: 74vh;
+  border: 0;
+  display: block;
+}
+
+.aboutImage {
+  width: 240px;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  opacity: 0.9;
+  justify-self: end;
+}
+
+@media (max-width: 720px) {
+  .aboutLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .aboutImage {
+    width: 210px;
+    height: auto;
+    max-height: 260px;
+    justify-self: start;
+  }
+}
