@@ -100,9 +100,9 @@ function App() {
         <div style={{ fontWeight: 650, letterSpacing: '-0.02em' }}>PL</div>
         <nav style={{ display: 'flex', gap: 16 }}>
           <a href="#about">About</a>
+          <a href="#contact">Contact</a>
           <a href="#work">Work</a>
           <a href="#beyond">Beyond</a>
-          <a href="#contact">Contact</a>
         </nav>
       </header>
 
