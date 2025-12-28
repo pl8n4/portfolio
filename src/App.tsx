@@ -52,6 +52,7 @@ function App() {
 
   const openProject = (project: Project) => {
     lastFocusRef.current = document.activeElement as HTMLElement | null;
+    setEmbeddedHref(null);
     setActiveProject(project);
   };
 
@@ -93,10 +94,6 @@ function App() {
     if (beyondPreviewSrc) return;
     lastFocusRef.current?.focus?.();
   }, [activeProject, beyondPreviewSrc]);
-
-  useEffect(() => {
-    setEmbeddedHref(null);
-  }, [activeProject?.title]);
 
   return (
     <div className="container">
