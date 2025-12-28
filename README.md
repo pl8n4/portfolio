@@ -1,73 +1,57 @@
-# React + TypeScript + Vite
+# Pablo Lasarte — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio site showcasing selected projects, background, and contact info.
 
-Currently, two official plugins are available:
+- Focus: backend systems, data engineering, applied ML
+- Tech: React + TypeScript + Vite
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Highlights
 
-## React Compiler
+- Projects section with a modal for extended write-ups and repo links
+- Inline PDF viewer for research poster content
+- “Beyond the Code” photo gallery with a lightweight image preview modal
+- Keyboard-friendly interactions (ESC to close modals, focus managed on open/close)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Getting started
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js 18+ (recommended)
+- npm
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Install & run
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Then open the URL shown in the terminal (usually `http://localhost:5173`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Useful scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build    # production build (outputs to dist/)
+npm run preview  # serve the production build locally
+npm run lint     # run ESLint
 ```
+
+## Editing content
+
+- Main content: `src/App.tsx` (projects, about blurb, contact links)
+- Styling: `src/styles/global.css`
+- Static assets: `src/assets/` (images + PDF)
+
+## Deployment
+
+This repo includes a GitHub Actions workflow for Azure Static Web Apps at
+`.github/workflows/azure-static-web-apps-black-mud-0791fa010.yml`.
+
+- Builds on pushes to `main` and deploys the `dist/` output
+- Requires the repo secret `AZURE_STATIC_WEB_APPS_API_TOKEN_BLACK_MUD_0791FA010`
+
+## Contact
+
+- Email: `pablo.lasarte1283@gmail.com`
+- GitHub: https://github.com/pl8n4
+- LinkedIn: https://www.linkedin.com/in/pablo-lasarte-a0a68b204/
