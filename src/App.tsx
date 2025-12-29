@@ -63,13 +63,36 @@ function App() {
   const [beyondPreviewSrc, setBeyondPreviewSrc] = useState<string | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const lastFocusRef = useRef<HTMLElement | null>(null);
-  const preloadedDiagramImagesRef = useRef<HTMLImageElement[]>([]);
+  const preloadedImageSrcRef = useRef<Set<string>>(new Set());
+
+  const preloadImage = (src: string) => {
+    if (preloadedImageSrcRef.current.has(src)) return;
+    preloadedImageSrcRef.current.add(src);
+    const img = new Image();
+    img.src = src;
+    img.decoding = 'async';
+    img.decode?.().catch(() => {});
+  };
 
   const openProject = (project: Project) => {
     lastFocusRef.current = document.activeElement as HTMLElement | null;
     setEmbeddedHref(null);
     setShowEmbeddedMedia(false);
     setActiveProject(project);
+
+    if (project.media?.src) {
+      const schedule = (cb: () => void) => {
+        const requestIdleCallback = (globalThis as unknown as { requestIdleCallback?: (callback: () => void, options?: { timeout?: number }) => void })
+          .requestIdleCallback;
+        if (typeof requestIdleCallback === 'function') {
+          requestIdleCallback(cb, { timeout: 1500 });
+          return;
+        }
+        setTimeout(cb, 0);
+      };
+
+      schedule(() => preloadImage(project.media!.src));
+    }
   };
 
   const closeProject = () => {
@@ -79,17 +102,6 @@ function App() {
   };
 
   const closeBeyondPreview = () => setBeyondPreviewSrc(null);
-
-  useEffect(() => {
-    const sources = [eplErdImage, filmfiendSystemArchImage];
-    sources.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-      img.decoding = 'async';
-      preloadedDiagramImagesRef.current.push(img);
-      img.decode?.().catch(() => {});
-    });
-  }, []);
 
   useEffect(() => {
     if (!activeProject && !beyondPreviewSrc) return;
