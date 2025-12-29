@@ -3,6 +3,7 @@ import mriPosterPdf from './assets/mri_poster.pdf';
 import beyondArgentinaImage from './assets/arg.jpg';
 import beyondSoccerImage from './assets/soccer.jpg';
 import beyondSkiImage from './assets/ski.jpg';
+import eplErdImage from './assets/EPL_ERD.png';
 import { useEffect, useRef, useState } from 'react';
 
 type Project = {
@@ -10,6 +11,7 @@ type Project = {
   keywords: string;
   description: string;
   details?: string;
+  media?: { src: string; alt: string; caption?: string };
   links?: Array<{ label: string; href: string }>;
 };
 
@@ -31,6 +33,11 @@ function App() {
         'iOS app that provides analytics for the English Premier League.',
       details:
         'As a lifelong soccer fan, I wanted to build something that combined my love for the game with my obsession with stats. It also served as a hands-on way to practice full-stack development and data modeling without the complexity of live data ingestion or deployment. The focus was on understanding how data flows through a system. From storage, through an API, to a client rather than on building a production ready pipeline.\n\nThe application is centered around a MySQL relational database that models teams, matches, and results using representative sample data entered manually. On top of this, I implemented a backend service in Python using Flask that exposes analytics through a REST API and handles data access and aggregation. The backend is designed to be extended as additional data or features are added.\n\nThe frontend is an iOS application written in Swift that connects to this API to display match-level information and derived insights, completing the loop from stored data to user-facing output. Although the system runs locally and operates on a static dataset, it mirrors the structure of a larger production pipeline by maintaining clear separation between the database layer, application logic, and presentation layer.',
+      media: {
+        src: eplErdImage,
+        alt: 'Entity relationship diagram for the English Premier League analytics app database schema',
+        caption: 'Database ERD',
+      },
       links: [{ label: 'GitHub repo', href: 'https://github.com/pl8n4/EPL-Database-Application' }],
     },
     {
@@ -46,6 +53,7 @@ function App() {
 
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [embeddedHref, setEmbeddedHref] = useState<string | null>(null);
+  const [showEmbeddedMedia, setShowEmbeddedMedia] = useState(false);
   const [beyondPreviewSrc, setBeyondPreviewSrc] = useState<string | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const lastFocusRef = useRef<HTMLElement | null>(null);
@@ -53,12 +61,14 @@ function App() {
   const openProject = (project: Project) => {
     lastFocusRef.current = document.activeElement as HTMLElement | null;
     setEmbeddedHref(null);
+    setShowEmbeddedMedia(false);
     setActiveProject(project);
   };
 
   const closeProject = () => {
     setActiveProject(null);
     setEmbeddedHref(null);
+    setShowEmbeddedMedia(false);
   };
 
   const closeBeyondPreview = () => setBeyondPreviewSrc(null);
@@ -113,7 +123,7 @@ function App() {
             <div>
               <h1>Pablo Lasarte</h1>
               <p className="muted" style={{ marginTop: 16, maxWidth: 70 * 8 }}>
-                Computer Science senior focused on backend systems, data engineering, and applied machine learning. I
+                I'm a senior studying in Computer Science at Mizzou focused on backend systems, data engineering, and applied machine learning. I
                 enjoy building reliable pipelines and APIs, working with messy real-world data, and turning complex
                 problems into maintainable systems.
               </p>
@@ -291,9 +301,20 @@ function App() {
                 {activeProject.details ?? activeProject.description}
               </p>
 
-              {activeProject.links?.length ? (
+              {activeProject.media || activeProject.links?.length ? (
                 <div className="modalLinks">
-                  {activeProject.links.map(({ label, href }) =>
+                  {activeProject.media ? (
+                    <button
+                      type="button"
+                      className="modalLinkPill"
+                      onClick={() => setShowEmbeddedMedia((current) => !current)}
+                    >
+                      {showEmbeddedMedia
+                        ? `Hide ${activeProject.media.caption ?? 'image'}`
+                        : activeProject.media.caption ?? 'View image'}
+                    </button>
+                  ) : null}
+                  {(activeProject.links ?? []).map(({ label, href }) =>
                     href.toLowerCase().endsWith('.pdf') ? (
                       <button
                         key={href}
@@ -310,6 +331,23 @@ function App() {
                     ),
                   )}
                 </div>
+              ) : null}
+
+              {showEmbeddedMedia && activeProject.media ? (
+                <figure className="modalMedia" aria-label={activeProject.media.caption ?? 'Project media'}>
+                  <img
+                    className="modalMediaImg"
+                    src={activeProject.media.src}
+                    alt={activeProject.media.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  {activeProject.media.caption ? (
+                    <figcaption className="muted" style={{ marginTop: 10, fontSize: 13 }}>
+                      {activeProject.media.caption}
+                    </figcaption>
+                  ) : null}
+                </figure>
               ) : null}
 
               {embeddedHref ? (
