@@ -63,6 +63,7 @@ function App() {
   const [beyondPreviewSrc, setBeyondPreviewSrc] = useState<string | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const lastFocusRef = useRef<HTMLElement | null>(null);
+  const preloadedDiagramImagesRef = useRef<HTMLImageElement[]>([]);
 
   const openProject = (project: Project) => {
     lastFocusRef.current = document.activeElement as HTMLElement | null;
@@ -78,6 +79,17 @@ function App() {
   };
 
   const closeBeyondPreview = () => setBeyondPreviewSrc(null);
+
+  useEffect(() => {
+    const sources = [eplErdImage, filmfiendSystemArchImage];
+    sources.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      img.decoding = 'async';
+      preloadedDiagramImagesRef.current.push(img);
+      img.decode?.().catch(() => {});
+    });
+  }, []);
 
   useEffect(() => {
     if (!activeProject && !beyondPreviewSrc) return;
@@ -345,6 +357,7 @@ function App() {
                     className="modalMediaImg"
                     src={activeProject.media.src}
                     alt={activeProject.media.alt}
+                    fetchPriority="high"
                     loading="lazy"
                     decoding="async"
                   />
