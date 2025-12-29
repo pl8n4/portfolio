@@ -4,6 +4,7 @@ import beyondArgentinaImage from './assets/arg.jpg';
 import beyondSoccerImage from './assets/soccer.jpg';
 import beyondSkiImage from './assets/ski.jpg';
 import eplErdImage from './assets/EPL_ERD.png';
+import filmfiendSystemArchImage from './assets/FilmfiendSystemArch.png';
 import { useEffect, useRef, useState } from 'react';
 
 type Project = {
@@ -47,6 +48,11 @@ function App() {
         'A movie discovery platform that lets users explore films, save personalized watchlists, and access live movie data.',
       details:
         'Filmfiend was a team-based project built as part of my Web Development II (CS4830) course, where I worked primarily as a backend engineer on a movie discovery platform. The goal of the project was to design a full-stack web application that allowed users to search for movies, manage personal watchlists, and persist user data securely.\n\nI was responsible for designing and implementing the backend architecture using Node.js and Express. This included building a RESTful API to handle user authentication, movie data retrieval, and watchlist management. The application integrated the OMDB API to fetch real-time movie information, which was then processed and served to the frontend in a consistent format.\n\nOn the data side, I designed the MongoDB schema to support user accounts and persistent watchlists, and implemented JWT-based authentication to secure API endpoints and manage user sessions. I worked closely with the frontend team to define API contracts and request/response structures, ensuring smooth data flow and secure communication with the Angular client.\n\nThis project gave me experience working within a team environment, translating frontend requirements into backend interfaces, and building authenticated APIs that connect third-party services with application-specific data models.',
+      media: {
+        src: filmfiendSystemArchImage,
+        alt: 'System architecture diagram for the Filmfiend application',
+        caption: 'System architecture',
+      },
       links: [{ label: 'GitHub repo', href: 'https://github.com/ketchuppacket02/MEAN-Stack-Final-Project' }],
     },
   ];
