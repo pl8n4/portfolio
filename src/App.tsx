@@ -5,6 +5,7 @@ import beyondSoccerImage from './assets/soccer.jpg';
 import beyondSkiImage from './assets/ski.jpg';
 import eplErdImage from './assets/EPL_ERD.png';
 import filmfiendSystemArchImage from './assets/FilmfiendSystemArch.png';
+import focusPredictDiagramImage from './assets/FocusPredict_system_diagram.png';
 import { useEffect, useRef, useState } from 'react';
 
 type Project = {
@@ -40,6 +41,19 @@ function App() {
         caption: 'Database ERD',
       },
       links: [{ label: 'GitHub repo', href: 'https://github.com/pl8n4/EPL-Database-Application' }],
+    },
+    {
+      title: 'FocusPredict AI',
+      keywords: 'Applied ML · Cloud Architecture · Healthcare',
+      description:
+        'Diagnostic tool that uses machine learning on neuroimaging data to provide objective ADHD assessments.',
+      details:
+        'Current ADHD diagnosis relies heavily on subjective methods like the Connors rating scale and observations made from parents and teachers. These methods are context-depndent, inconsistent across children, and lack objective biological signals, leaving 7.1 million U.S. children diagnosed without biological validation and countless others waiting years for answers.\n\nThe working system takes preprocessed fMRI-derived features and performs clinical inference through a React-based dashboard. I trained custom models on the ADHD-200 dataset to distinguish ADHD from neurotypical patterns, then deployed them as managed endpoints on Azure Machine Learning for real-time inference. To address the models being ‘black boxes’, I integrated SHAP feature importance analysis with a PubMed-based knowledge retrieval system that generates evidence-backed clinical interpretations using Azure OpenAI. The dashboard visualizes ADHD likelihood scores, confidence intervals, and highlights which brain regions contributed most to each prediction, with citations linking back to peer-reviewed literature. While this is a prototype, the full system would automate the entire pipeline from raw fMRI scans to actionable diagnosis and insights.\n\nKey areas for expansion include: (1) implementing the automated preprocessing pipeline to enable true clinical deployment, (2) moving beyond binary classification to dimensional ADHD subtype prediction, (3) validating against prospective clinical data rather than retrospective research datasets, and (4) exploring transfer learning to generalize the framework to other neurodevelopmental conditions. While significant regulatory and clinical validation hurdles remain, the prototype demonstrates that objective neuroimaging biomarkers combined with interpretable AI could meaningfully complement traditional behavioral assessments.',
+      media: {
+        src: focusPredictDiagramImage,
+        alt: 'System diagram for FocusPredict AI',
+        caption: 'System diagram',
+      },
     },
     {
       title: 'Filmfiend',
