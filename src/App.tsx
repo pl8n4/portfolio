@@ -44,7 +44,7 @@ function App() {
     },
     {
       title: 'FocusPredict AI',
-      keywords: 'Applied ML · Cloud Architecture · Healthcare',
+      keywords: 'Applied ML · Cloud Architecture · Healthcare · UX',
       description:
         'Diagnostic tool that uses machine learning on neuroimaging data to provide objective ADHD assessments.',
       details:
