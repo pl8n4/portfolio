@@ -151,9 +151,9 @@ function App() {
 
   return (
     <div className="container">
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ fontWeight: 650, letterSpacing: '-0.02em' }}>PL</div>
-        <nav style={{ display: 'flex', gap: 16 }}>
+      <header className="header">
+        <div className="logo">PL</div>
+        <nav className="nav">
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
           <a href="#work">Work</a>
@@ -161,35 +161,33 @@ function App() {
         </nav>
       </header>
 
-      <main style={{ marginTop: 48, display: 'grid', gap: 24 }}>
-        <section className="panel" style={{ padding: 32 }} id="about">
+      <main style={{ marginTop: 48, display: 'grid', gap: 28 }}>
+        <section className="panel heroSection" id="about">
           <div className="aboutLayout">
             <div>
-              <h1>Pablo Lasarte</h1>
-              <p className="muted" style={{ marginTop: 16, maxWidth: 70 * 8 }}>
-                I'm a senior studying in Computer Science at Mizzou focused on backend systems, data engineering, and applied machine learning. I
+              <h1 className="heroTitle">Pablo Lasarte</h1>
+              <p className="heroBio">
+                I'm a senior studying Computer Science at Mizzou focused on backend systems, data engineering, and applied machine learning. I
                 enjoy building reliable pipelines and APIs, working with messy real-world data, and turning complex
                 problems into maintainable systems.
               </p>
 
-              <div id="contact" style={{ marginTop: 18 }}>
-                <div className="muted" style={{ marginBottom: 10 }}>
-                  Contact me →{' '}
-                  <a
-                    href="mailto:pablo.lasarte1283@gmail.com"
-                    title="Email me"
-                    aria-label="Email pablo.lasarte1283@gmail.com"
-                    style={{ textDecoration: 'underline', textUnderlineOffset: 3 }}
-                  >
-                    pablo.lasarte1283@gmail.com
-                  </a>
-                </div>
-                <ul style={{ margin: 0, paddingLeft: 18 }}>
+              <div id="contact" className="contactSection">
+                <div className="contactLabel">Get in touch</div>
+                <a
+                  href="mailto:pablo.lasarte1283@gmail.com"
+                  title="Email me"
+                  aria-label="Email pablo.lasarte1283@gmail.com"
+                  className="contactEmail"
+                >
+                  pablo.lasarte1283@gmail.com
+                </a>
+                <ul className="socialLinks">
                   <li>
-                    <a href="https://github.com/pl8n4">GitHub</a>
+                    <a href="https://github.com/pl8n4" className="socialLink">GitHub</a>
                   </li>
                   <li>
-                    <a href="https://www.linkedin.com/in/pablo-lasarte-a0a68b204/">LinkedIn</a>
+                    <a href="https://www.linkedin.com/in/pablo-lasarte-a0a68b204/" className="socialLink">LinkedIn</a>
                   </li>
                 </ul>
               </div>
@@ -205,11 +203,14 @@ function App() {
           </div>
         </section>
 
-        <section id="work" className="panel" style={{ padding: 32 }}>
-          <h2>Projects</h2>
-          <p className="muted" style={{ marginTop: 10 }}>Here are some of the projects I've worked on both in and out of class. Click on them to learn more!</p>
+        <section id="work" className="panel projectsSection">
+          <div className="sectionHeader">
+            <span className="sectionNumber">01</span>
+            <h2>Projects</h2>
+          </div>
+          <p className="muted" style={{ marginBottom: 24 }}>Here are some of the projects I've worked on both in and out of class. Click on them to learn more!</p>
 
-          <div className="projectsGrid" style={{ marginTop: 20 }}>
+          <div className="projectsGrid">
             {selectedWork.map((project) => (
               <button
                 key={project.title}
@@ -217,21 +218,24 @@ function App() {
                 className="panel projectCard"
                 onClick={() => openProject(project)}
               >
-                <h3 style={{ fontSize: 16, marginBottom: 8 }}>{project.title}</h3>
-                <p className="muted" style={{ margin: '0 0 8px', fontSize: 13 }}>{project.keywords}</p>
-                <p className="muted" style={{ margin: 0 }}>{project.description}</p>
+                <h3 className="projectCardTitle">{project.title}</h3>
+                <p className="projectKeywords">{project.keywords}</p>
+                <p className="projectDescription">{project.description}</p>
               </button>
             ))}
           </div>
         </section>
 
-        <section id="beyond" className="panel beyondSection" style={{ padding: 32 }}>
-          <h2>Beyond the Code</h2>
-          <p className="muted" style={{ marginTop: 10 }}>
+        <section id="beyond" className="panel beyondSection">
+          <div className="sectionHeader">
+            <span className="sectionNumber">02</span>
+            <h2>Beyond the Code</h2>
+          </div>
+          <p className="muted" style={{ marginBottom: 24 }}>
             A few things I care about outside of engineering.
           </p>
 
-          <div className="projectsGrid" style={{ marginTop: 20 }}>
+          <div className="projectsGrid">
             <article className="panel beyondCard">
               <button
                 type="button"
@@ -244,8 +248,8 @@ function App() {
               >
                 <img className="beyondImage" src={beyondArgentinaImage} alt="Argentina" loading="lazy" decoding="async" />
               </button>
-              <h3 style={{ fontSize: 16, marginBottom: 8 }}>Argentine Roots</h3>
-              <p className="muted" style={{ margin: 0 }}>
+              <h3 className="beyondCardTitle">Argentine Roots</h3>
+              <p className="beyondCardText">
                 While I love the U.S., I can't ignore my Argentine roots... I was born and partially raised in Buenos
                 Aires, and I'm a passionate advocate for Argentine culture - ask me about the secret to a perfect asado
                 or why the 2022 World Cup was up there as one of the greatest moments of my life.
@@ -264,8 +268,8 @@ function App() {
               >
                 <img className="beyondImage" src={beyondSoccerImage} alt="Soccer" loading="lazy" decoding="async" />
               </button>
-              <h3 style={{ fontSize: 16, marginBottom: 8 }}>Matchday Rituals</h3>
-              <p className="muted" style={{ margin: 0 }}>
+              <h3 className="beyondCardTitle">Matchday Rituals</h3>
+              <p className="beyondCardText">
                 My English Premier League app wasn't just a coding exercise, it was born from a genuine obsession with
                 the game. If it's Saturday morning, I'm probably watching the Premier League or my favorite team,
                 FC Barcelona.
@@ -284,16 +288,16 @@ function App() {
               >
                 <img className="beyondImage" src={beyondSkiImage} alt="Skiing" loading="lazy" decoding="async" />
               </button>
-              <h3 style={{ fontSize: 16, marginBottom: 8 }}>Active Lifestyle</h3>
-              <p className="muted" style={{ margin: 0 }}>
-                Whether it's lifting, hiking, or pickup soccer, staying active is a non-negotiable part of my day. 
-                I love the simple, honest challenge of pushing myself and the consistency required to keep moving forward. 
-                There’s something rewarding about just putting in the work and seeing where it takes you.
+              <h3 className="beyondCardTitle">Active Lifestyle</h3>
+              <p className="beyondCardText">
+                Whether it's lifting, hiking, or pickup soccer, staying active is a non-negotiable part of my day.
+                I love the simple, honest challenge of pushing myself and the consistency required to keep moving forward.
+                There's something rewarding about just putting in the work and seeing where it takes you.
               </p>
             </article>
           </div>
 
-          <div className="chips" style={{ marginTop: 18 }}>
+          <div className="chips">
             <span className="chip">Travel</span>
             <span className="chip">Soccer</span>
             <span className="chip">Pool</span>
@@ -302,7 +306,6 @@ function App() {
             <span className="chip">Cooking</span>
             <span className="chip">Asado</span>
             <span className="chip">Skiing</span>
-
           </div>
 
           {beyondPreviewSrc ? (
@@ -325,10 +328,10 @@ function App() {
             >
               <div className="modalHeader">
                 <div>
-                  <h3 id="project-modal-title" style={{ fontSize: 18, marginBottom: 6 }}>
+                  <h3 id="project-modal-title" className="modalTitle">
                     {activeProject.title}
                   </h3>
-                  <p className="muted" style={{ margin: 0, fontSize: 13 }}>{activeProject.keywords}</p>
+                  <p className="modalKeywords">{activeProject.keywords}</p>
                 </div>
                 <button
                   ref={closeButtonRef}
@@ -341,7 +344,7 @@ function App() {
                 </button>
               </div>
 
-              <p className="muted modalDetails" style={{ marginTop: 16 }}>
+              <p className="muted modalDetails">
                 {activeProject.details ?? activeProject.description}
               </p>
 
