@@ -409,12 +409,107 @@ h3 {
   margin: 0;
 }
 
+/* ===== PUBLICATIONS SECTION ===== */
+
+.publicationsSection {
+  padding: var(--space-6);
+  background: var(--panel);
+  animation: slideUp 0.6s ease 0.15s both;
+}
+
+.pubList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.pubCard {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--sage);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.pubCard:hover {
+  border-left-color: var(--terracotta);
+  box-shadow: var(--shadow-card);
+  transform: translateX(4px);
+}
+
+.pubCardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.pubTypeBadge {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  line-height: 1;
+}
+
+.pubStatus {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--sage-dark);
+  background: rgba(122, 143, 122, 0.1);
+  padding: 3px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+}
+
+.pubTitle {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.pubAuthors {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  margin: 0 0 4px;
+  line-height: 1.5;
+}
+
+.pubVenue {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.pubNote {
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+.pubYear {
+  color: var(--text-muted);
+}
+
+.pubLinks {
+  margin-top: var(--space-3);
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
 /* ===== BEYOND THE CODE SECTION ===== */
 
 .beyondSection {
   padding: var(--space-6);
   background: linear-gradient(180deg, var(--panel) 0%, var(--bg-warm) 100%);
-  animation: slideUp 0.6s ease 0.2s both;
+  animation: slideUp 0.6s ease 0.25s both;
 }
 
 .beyondCard {
@@ -694,6 +789,7 @@ h3 {
 
   .heroSection,
   .projectsSection,
+  .publicationsSection,
   .beyondSection {
     padding: var(--space-4);
   }

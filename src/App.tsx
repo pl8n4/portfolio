@@ -1,4 +1,4 @@
-import aboutImage from './assets/headshot.jpg';
+import aboutImage from './assets/headshot.png';
 import mriPosterPdf from './assets/mri_poster.pdf';
 import beyondArgentinaImage from './assets/arg.jpg';
 import beyondSoccerImage from './assets/soccer.jpg';
@@ -17,6 +17,17 @@ type Project = {
   links?: Array<{ label: string; href: string }>;
 };
 
+type Publication = {
+  title: string;
+  authors: string;
+  venue: string;
+  year: string;
+  badge: string;
+  status?: string;
+  note?: string;
+  links?: Array<{ label: string; href: string }>;
+};
+
 function App() {
   const selectedWork: Project[] = [
     {
@@ -26,7 +37,7 @@ function App() {
         'End-to-end pipeline that processes multimodal MRI data and trains predictive models to estimate nicotine dependence.',
       details:
         'As part of Professor Satish Nair\'s lab and alongside a PhD student, I worked on applying machine learning to study the neural correlates of nicotine dependence. The project focused on using multimodal MRI data to better understand how structural and functional brain features relate to addiction severity, and whether combining these modalities could improve predictive performance.\n\nWe showed that non-linear models such as SVMs and random forests consistently outperformed traditional GLM-based analyses, while also uncovering additional brain regions linked to addiction through model agnostic feature importance methods. These results suggest that standard linear approaches miss meaningful structure in neuroimaging data.\n\nBuilding on this, we are exploring more detailed feature importance analyses to better understand how predictive signals are distributed across brain regions and subjects. We are also expanding the dataset to improve statistical power and model stability, and investigating latent space representations. Through this, we aim to move beyond prediction alone toward deeper interpretability and generalization.  ',
-      links: [{ label: 'SfN 2025 poster (PDF)', href: mriPosterPdf }],
+      links: [{ label: 'See related publications ↓', href: '#publications' }],
     },
     {
       title: 'English Premier League Analytics App',
@@ -70,7 +81,47 @@ function App() {
       },
       links: [{ label: 'GitHub repo', href: 'https://github.com/ketchuppacket02/MEAN-Stack-Final-Project' }],
     },
+    {
+      title: 'Home Cloud Server',
+      keywords: 'Linux · Docker · Self-Hosted Infrastructure · Networking',
+      description:
+        'A self-hosted private cloud for family use, built on a repurposed 2012 iMac.',
+      details:
+        "I've always been curious about what it actually takes to run your own infrastructure, not just spinning up a VM, but designing something that your family relies on daily. This project started as a way to get off Google Drive and iCloud, and turned into a much deeper dive into storage design, networking, and container orchestration than I originally expected.\n\nThe server runs on a repurposed 2012 iMac with a RAID 10 array across four 4TB drives for family data, with a separate SSD for the OS and performance-sensitive workloads like databases. On top of that, I run about a dozen containerized services via Docker Compose: file sync, photo backup with ML-based face recognition, network-wide DNS ad blocking, service monitoring, and automated update pipelines.\n\nThe most interesting problems turned out to be the operational ones: getting DNS to route correctly across wired and WiFi subnets (which involved drilling through the floor to run an ethernet cable to the basement, something my dad was not particularly happy about), and making the whole thing observable with alerting so I actually know if something breaks at 3am. It's not a production system, but designing it like one taught me more about infrastructure than any coursework did.",
+    },
   ];
+
+  const publications: Publication[] = [
+    {
+      title: 'In a State to Win?',
+      authors: 'John O\'Donnell, Joseph Rollinson, Joe Schweppes, Pablo Lasarte, Matthew McIntosh',
+      venue: 'Significance',
+      year: '2026',
+      badge: 'Journal Article',
+      note: 'Vol. 23, Issue 2',
+      links: [{ label: 'View article (DOI)', href: 'https://doi.org/10.1093/jrssig/qmag012' }],
+    },
+    {
+      title: 'Predicting Nicotine Dependence from Multimodal MRI Data',
+      authors: 'Vladimir Omelyusik, Pablo Lasarte, Spencer Upton, Nicholas Henigman, Brett Froeliger, Satish S. Nair',
+      venue: 'Society for Neuroscience (SfN)',
+      year: '2025',
+      badge: 'Conference Poster',
+      links: [{ label: 'View poster (PDF)', href: mriPosterPdf }],
+    },
+    {
+      title: 'Predicting Nicotine Dependence from Multimodal MRI Data',
+      authors: 'Vladimir Omelyusik, Pablo Lasarte, Spencer Upton, Nicholas Henigman, Brett Froeliger, Satish S. Nair',
+      venue: 'ACM Southeast Conference (ACMSE)',
+      year: '2026',
+      badge: 'Conference Paper',
+      status: 'Accepted',
+      note: 'Short paper — extends SfN 2025 poster work',
+    },
+  ];
+
+  const [expandedPubIdx, setExpandedPubIdx] = useState<number | null>(null);
+  const [pubPdfHref, setPubPdfHref] = useState<string | null>(null);
 
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [embeddedHref, setEmbeddedHref] = useState<string | null>(null);
@@ -156,8 +207,8 @@ function App() {
         <div className="logo">PL</div>
         <nav className="nav">
           <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-          <a href="#work">Work</a>
+          <a href="#work">Projects</a>
+          <a href="#publications">Publications</a>
           <a href="#beyond">Beyond</a>
         </nav>
       </header>
@@ -227,9 +278,78 @@ function App() {
           </div>
         </section>
 
-        <section id="beyond" className="panel beyondSection">
+        <section id="publications" className="panel publicationsSection">
           <div className="sectionHeader">
             <span className="sectionNumber">02</span>
+            <h2>Publications</h2>
+          </div>
+          <p className="muted" style={{ marginBottom: 24 }}>
+            Research papers and presentations I've contributed to.
+          </p>
+
+          <div className="pubList">
+            {publications.map((pub, idx) => {
+              const isExpanded = expandedPubIdx === idx;
+              return (
+                <article key={`${pub.title}-${pub.venue}`} className="pubCard">
+                  <div className="pubCardHeader">
+                    <div className="pubTypeBadge">
+                      {pub.badge}
+                    </div>
+                    {pub.status && <span className="pubStatus">{pub.status}</span>}
+                  </div>
+
+                  <h3 className="pubTitle">{pub.title}</h3>
+                  <p className="pubAuthors">{pub.authors}</p>
+                  <p className="pubVenue">
+                    <em>{pub.venue}</em>
+                    {pub.note && <span className="pubNote"> · {pub.note}</span>}
+                    <span className="pubYear"> ({pub.year})</span>
+                  </p>
+
+                  {pub.links?.length ? (
+                    <div className="pubLinks">
+                      {pub.links.map(({ label, href }) =>
+                        href.toLowerCase().endsWith('.pdf') ? (
+                          <button
+                            key={href}
+                            type="button"
+                            className="modalLinkPill"
+                            onClick={() => {
+                              if (isExpanded && pubPdfHref === href) {
+                                setExpandedPubIdx(null);
+                                setPubPdfHref(null);
+                              } else {
+                                setExpandedPubIdx(idx);
+                                setPubPdfHref(href);
+                              }
+                            }}
+                          >
+                            {isExpanded && pubPdfHref === href ? `Hide poster` : label}
+                          </button>
+                        ) : (
+                          <a key={href} className="modalLinkPill" href={href} target="_blank" rel="noreferrer">
+                            {label}
+                          </a>
+                        ),
+                      )}
+                    </div>
+                  ) : null}
+
+                  {isExpanded && pubPdfHref ? (
+                    <div className="pdfEmbed" style={{ marginTop: 16 }} aria-label="Embedded poster PDF viewer">
+                      <iframe className="pdfFrame" title="Publication PDF" src={pubPdfHref} />
+                    </div>
+                  ) : null}
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        <section id="beyond" className="panel beyondSection">
+          <div className="sectionHeader">
+            <span className="sectionNumber">03</span>
             <h2>Beyond the Code</h2>
           </div>
           <p className="muted" style={{ marginBottom: 24 }}>
@@ -372,6 +492,10 @@ function App() {
                       >
                         {embeddedHref === href ? `Hide ${label}` : label}
                       </button>
+                    ) : href.startsWith('#') ? (
+                      <a key={href} className="modalLinkPill" href={href} onClick={() => closeProject()}>
+                        {label}
+                      </a>
                     ) : (
                       <a key={href} className="modalLinkPill" href={href} target="_blank" rel="noreferrer">
                         {label}
