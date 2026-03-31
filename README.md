@@ -1,15 +1,21 @@
-# Pablo Lasarte — Portfolio
+# Pablo Lasarte - Portfolio
 
-Personal portfolio site showcasing selected projects, background, and contact info.
+Personal portfolio site showcasing selected projects, publications, and background.
 
 - Focus: backend systems, data engineering, applied ML
 - Tech: React + TypeScript + Vite
 
+## Sections
+
+- **About** - bio, contact info, and social links
+- **Projects** - selected work with modal write-ups, repo links, and embedded media
+- **Publications** - research papers and presentations with an inline PDF viewer for posters
+- **Beyond the Code** - photo gallery with a lightweight image preview modal
+
 ## Highlights
 
-- Projects section with a modal for extended write-ups and repo links
+- Project cards open a detail modal with extended write-ups and links
 - Inline PDF viewer for research poster content
-- “Beyond the Code” photo gallery with a lightweight image preview modal
 - Keyboard-friendly interactions (ESC to close modals, focus managed on open/close)
 
 ## Getting started
@@ -19,7 +25,7 @@ Personal portfolio site showcasing selected projects, background, and contact in
 - Node.js 18+ (recommended)
 - npm
 
-### Install & run
+### Install and run
 
 ```bash
 npm install
@@ -38,9 +44,9 @@ npm run lint     # run ESLint
 
 ## Editing content
 
-- Main content: `src/App.tsx` (projects, about blurb, contact links)
+- Main content: `src/App.tsx` (projects, publications, about blurb, contact links)
 - Styling: `src/styles/global.css`
-- Static assets: `src/assets/` (images + PDF)
+- Static assets: `src/assets/` (images + PDFs)
 
 ## Deployment
 
