@@ -60,4 +60,4 @@ This repo includes a GitHub Actions workflow for Azure Static Web Apps at
 
 - Email: `pablo.lasarte1283@gmail.com`
 - GitHub: https://github.com/pl8n4
-- LinkedIn: https://www.linkedin.com/in/pablo-lasarte-a0a68b204/
+- LinkedIn: https://www.linkedin.com/in/pablo-lasarte

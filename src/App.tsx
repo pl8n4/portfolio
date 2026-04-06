@@ -55,7 +55,7 @@ function App() {
     },
     {
       title: 'FocusPredict AI',
-      keywords: 'Applied ML · Cloud Architecture · Healthcare · UX · Live Demo',
+      keywords: 'Applied ML · Cloud Architecture · Healthcare · UX',
       description:
         'Diagnostic tool that uses machine learning on neuroimaging data to provide objective ADHD assessments.',
       details:
@@ -65,7 +65,6 @@ function App() {
         alt: 'System diagram for FocusPredict AI',
         caption: 'System diagram',
       },
-      links: [{ label: 'Live demo', href: 'https://focuspredict-demo.azurewebsites.net/' }],
     },
     {
       title: 'Filmfiend',
