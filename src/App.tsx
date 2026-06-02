@@ -218,7 +218,7 @@ function App() {
             <div>
               <h1 className="heroTitle">Pablo Lasarte</h1>
               <p className="heroBio">
-                I recently graduated from Mizzou, getting my Bachelors in CS with a focus on backend systems, data engineering, and applied machine learning. I
+                I recently graduated from Mizzou, getting my Bachelors in CS with a focus on data engineering and applied machine learning. I
                 enjoy building reliable pipelines and APIs, working with messy real-world data, and turning complex
                 problems into maintainable systems.
               </p>
