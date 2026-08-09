@@ -6,6 +6,7 @@ import beyondSkiImage from './assets/ski.jpg';
 import eplErdImage from './assets/EPL_ERD.png';
 import filmfiendSystemArchImage from './assets/FilmfiendSystemArch.png';
 import focusPredictDiagramImage from './assets/FocusPredict_system_diagram.png';
+import fieldTreatmentReviewDiagram from './assets/field-treatment-review-system.svg';
 import { useEffect, useRef, useState } from 'react';
 
 type Project = {
@@ -30,6 +31,20 @@ type Publication = {
 
 function App() {
   const selectedWork: Project[] = [
+    {
+      title: 'Field Treatment Review Automation',
+      keywords: 'Multi-Agent Systems · RAG · LangGraph · Regulatory Compliance',
+      description:
+        'A multi-agent system that reviews agricultural spray requests for regulatory compliance.',
+      details:
+        'This was the final project of my Revature AI Engineering training, built with three teammates over two weeks. We knew we\'d be placed with a St. Louis client in the agriculture industry, so we went looking for a problem in that space worth solving. We landed on a multi-agent system that reviews agricultural spray requests for regulatory compliance.\n\nWe learned that when an agronomist finds a problem in a crop/field, they decide what herbicide or product to use on it, but before any of it can actually be applied, they have to go through a thorough process. They need to establish who\'s licensed to apply it, where it can go, how much, how often, and under what conditions it will be used. Every one of those answers has to come out of the product\'s EPA label, a legally binding document that often runs past 50 pages and is written to be read by a person rather than queried by a program. The answers also aren\'t in the text alone: whether a given spray is legal depends on the field\'s crop and trait package, its growth stage, its application history, and the forecast.\n\nThe system we built takes a plain-English request from a field agronomist ("treat field F-02 with Roundup on Thursday") and returns a treatment plan where every decision is cited to the label passage behind it. Twelve LangGraph nodes handle intake, clarification, context gathering, retrieval, drafting, deterministic rule checks, and critique, then route the plan to approval, revision, or escalation, with the agronomist signing off before anything is written. My piece was the retrieval layer: five label PDFs ingested into 1,480 chunks tagged with product, page, and governing crop, embedded into a persisted Chroma store, wired in as the evidence source behind every citation.\n\nBeyond any one piece, the harder shared problem was the domain itself. None of us knew anything about agriculture going in, so a good chunk of those two weeks went to learning it well enough to know what was worth checking at all, which turned out to be the hardest part of the project.',
+      media: {
+        src: fieldTreatmentReviewDiagram,
+        alt: 'Architecture diagram for the Field Treatment Review system',
+        caption: 'System architecture',
+      },
+      links: [{ label: 'GitHub repo', href: 'https://github.com/pl8n4/field-treatment-system' }],
+    },
     {
       title: 'MRI Pipeline for Nicotine Dependence Prediction',
       keywords: 'Data Engineering · Applied ML · Research Project',

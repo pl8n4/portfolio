@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Field Treatment Review system architecture</title>
+  <desc id="desc">An agronomist uses a Streamlit interface connected to a LangGraph review workflow. The workflow reads operational records, weather, and EPA label evidence through a separate data layer. It returns a cited plan for required human review and writes only an approved simulated work order.</desc>
+
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#263c32" flood-opacity="0.11"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0L10 5L0 10Z" fill="#51655a"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0L10 5L0 10Z" fill="#397b92"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0L10 5L0 10Z" fill="#80649e"/>
+    </marker>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#dce5de" stroke-width="1" opacity="0.48"/>
+    </pattern>
+    <style>
+      .title { font: 700 38px Inter, ui-sans-serif, system-ui, sans-serif; fill: #20342b; letter-spacing: -0.8px; }
+      .subtitle { font: 400 17px Inter, ui-sans-serif, system-ui, sans-serif; fill: #66756d; }
+      .group-label { font: 700 12px Inter, ui-sans-serif, system-ui, sans-serif; letter-spacing: 1.6px; }
+      .group-title { font: 700 24px Inter, ui-sans-serif, system-ui, sans-serif; fill: #263c32; }
+      .group-copy { font: 400 13px Inter, ui-sans-serif, system-ui, sans-serif; fill: #6c7972; }
+      .node-title { font: 700 16px Inter, ui-sans-serif, system-ui, sans-serif; fill: #263c32; }
+      .node-copy { font: 400 12px Inter, ui-sans-serif, system-ui, sans-serif; fill: #6c7972; }
+      .tag { font: 700 10px Inter, ui-sans-serif, system-ui, sans-serif; letter-spacing: 1px; }
+      .flow { font: 600 11px Inter, ui-sans-serif, system-ui, sans-serif; fill: #65736b; }
+      .small { font: 500 11px Inter, ui-sans-serif, system-ui, sans-serif; fill: #77837c; }
+      .user-title { font: 700 19px Inter, ui-sans-serif, system-ui, sans-serif; fill: #263c32; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="#f6f7f3"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+
+  <text x="62" y="67" class="title">Field Treatment Review</text>
+  <text x="62" y="98" class="subtitle">Evidence-backed agricultural spray review with required human approval</text>
+
+  <!-- Connections are drawn first so component cards stay visually dominant. -->
+  <!-- Agronomist and interface -->
+  <path d="M220 407H278" fill="none" stroke="#51655a" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M278 449H220" fill="none" stroke="#51655a" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="249" y="394" class="flow" text-anchor="middle">request</text>
+  <text x="249" y="471" class="flow" text-anchor="middle">review</text>
+
+  <!-- Interface and workflow -->
+  <path d="M566 318H648" fill="none" stroke="#397b92" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <text x="607" y="302" class="flow" text-anchor="middle">request</text>
+  <path d="M648 580H566" fill="none" stroke="#397b92" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <text x="607" y="601" class="flow" text-anchor="middle">result</text>
+  <path d="M566 654H648" fill="none" stroke="#b7684b" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="607" y="640" class="flow" text-anchor="middle">decision</text>
+
+  <!-- Workflow and data layer -->
+  <path d="M1034 310H1118" fill="none" stroke="#80649e" stroke-width="3" marker-end="url(#arrowPurple)"/>
+  <text x="1076" y="294" class="flow" text-anchor="middle">query</text>
+  <path d="M1118 432H1034" fill="none" stroke="#80649e" stroke-width="3" marker-end="url(#arrowPurple)"/>
+  <text x="1076" y="453" class="flow" text-anchor="middle">context</text>
+  <path d="M1034 668H1118" fill="none" stroke="#6b9579" stroke-width="3" marker-end="url(#arrow)"/>
+  <text x="1076" y="650" class="flow" text-anchor="middle">write</text>
+
+  <!-- User -->
+  <g filter="url(#shadow)">
+    <rect x="52" y="328" width="168" height="202" rx="20" fill="#ffffff" stroke="#a9beb2" stroke-width="2"/>
+    <circle cx="136" cy="382" r="22" fill="#dce9e0"/>
+    <circle cx="136" cy="376" r="9" fill="#4e8064"/>
+    <path d="M105 425c7-24 55-24 62 0" fill="none" stroke="#4e8064" stroke-width="9" stroke-linecap="round"/>
+    <text x="136" y="467" class="user-title" text-anchor="middle">Agronomist</text>
+    <text x="136" y="492" class="node-copy" text-anchor="middle">submits the request</text>
+    <text x="136" y="510" class="node-copy" text-anchor="middle">and makes the decision</text>
+  </g>
+
+  <!-- COMPONENT 1: UI -->
+  <g filter="url(#shadow)">
+    <rect x="278" y="155" width="288" height="610" rx="22" fill="#fffaf5" stroke="#cc8d6b" stroke-width="2.5"/>
+  </g>
+  <text x="310" y="192" class="group-label" fill="#a85d41">01 · INTERFACE</text>
+  <text x="310" y="226" class="group-title">Streamlit app</text>
+  <text x="310" y="250" class="group-copy">The only surface the agronomist uses</text>
+
+  <g>
+    <rect x="310" y="286" width="224" height="112" rx="13" fill="#ffffff" stroke="#dcb49d" stroke-width="1.8"/>
+    <rect x="329" y="306" width="112" height="9" rx="4.5" fill="#e9c8b5"/>
+    <rect x="329" y="328" width="171" height="9" rx="4.5" fill="#f0d9cc"/>
+    <rect x="329" y="350" width="145" height="9" rx="4.5" fill="#f0d9cc"/>
+    <text x="329" y="384" class="node-title">Treatment request form</text>
+
+    <path d="M422 398V428" fill="none" stroke="#cc8d6b" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="310" y="428" width="224" height="119" rx="13" fill="#ffffff" stroke="#dcb49d" stroke-width="1.8"/>
+    <text x="329" y="460" class="node-title">Plan + evidence</text>
+    <text x="329" y="486" class="node-copy">recommendation and rule results</text>
+    <text x="329" y="506" class="node-copy">with visible label citations</text>
+    <rect x="329" y="519" width="116" height="18" rx="9" fill="#f5e2d7"/>
+    <text x="387" y="532" class="small" text-anchor="middle">read before action</text>
+
+    <path d="M422 547V577" fill="none" stroke="#cc8d6b" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="310" y="577" width="224" height="128" rx="13" fill="#b7684b"/>
+    <text x="329" y="608" class="tag" fill="#f9dfd4">REQUIRED HUMAN GATE</text>
+    <text x="329" y="641" class="node-title" style="fill:#ffffff">Approve or decline</text>
+    <text x="329" y="666" class="node-copy" style="fill:#fbe9e1">Nothing is written before approval.</text>
+    <text x="329" y="686" class="node-copy" style="fill:#fbe9e1">No real treatment is scheduled.</text>
+  </g>
+
+  <!-- COMPONENT 2: LANGGRAPH -->
+  <g filter="url(#shadow)">
+    <rect x="648" y="155" width="386" height="610" rx="22" fill="#f8fbfc" stroke="#67a0b5" stroke-width="2.5"/>
+  </g>
+  <text x="680" y="192" class="group-label" fill="#397b92">02 · ORCHESTRATION</text>
+  <text x="680" y="226" class="group-title">LangGraph workflow</text>
+  <text x="680" y="250" class="group-copy">Twelve nodes grouped into four readable stages</text>
+
+  <g>
+    <rect x="680" y="286" width="322" height="83" rx="13" fill="#edf5f8" stroke="#77aabe" stroke-width="1.8"/>
+    <text x="701" y="312" class="tag" fill="#397b92">LLM-ASSISTED</text>
+    <text x="701" y="340" class="node-title">Intake + clarification</text>
+    <text x="701" y="358" class="node-copy">parse the request without inventing missing details</text>
+
+    <path d="M841 369V392" fill="none" stroke="#397b92" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+
+    <rect x="680" y="392" width="322" height="83" rx="13" fill="#f2eef7" stroke="#9a82b6" stroke-width="1.8"/>
+    <text x="701" y="418" class="tag" fill="#80649e">DATA ACCESS</text>
+    <text x="701" y="446" class="node-title">Context gathering + retrieval</text>
+    <text x="701" y="464" class="node-copy">request records, forecast, and label passages</text>
+
+    <path d="M841 475V498" fill="none" stroke="#397b92" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+
+    <rect x="680" y="498" width="322" height="89" rx="13" fill="#edf5f8" stroke="#77aabe" stroke-width="1.8"/>
+    <text x="701" y="524" class="tag" fill="#397b92">LLM + CODE</text>
+    <text x="701" y="552" class="node-title">Draft plan + deterministic rules</text>
+    <text x="701" y="572" class="node-copy">cite evidence, then check rate, timing, and safety</text>
+
+    <path d="M841 587V610" fill="none" stroke="#397b92" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+
+    <rect x="680" y="610" width="322" height="95" rx="13" fill="#edf5f8" stroke="#77aabe" stroke-width="1.8"/>
+    <text x="701" y="636" class="tag" fill="#397b92">LLM-ASSISTED</text>
+    <text x="701" y="664" class="node-title">Critic + conditional routing</text>
+    <text x="701" y="684" class="node-copy">human review · one revision · clarification · escalation</text>
+  </g>
+
+  <!-- COMPONENT 3: DATA -->
+  <g filter="url(#shadow)">
+    <rect x="1118" y="155" width="430" height="610" rx="22" fill="#faf8fc" stroke="#9276ae" stroke-width="2.5"/>
+  </g>
+  <text x="1150" y="192" class="group-label" fill="#80649e">03 · DATA &amp; EVIDENCE</text>
+  <text x="1150" y="226" class="group-title">Data layer</text>
+  <text x="1150" y="250" class="group-copy">Typed access to operational context and sources</text>
+
+  <g>
+    <rect x="1150" y="286" width="366" height="94" rx="13" fill="#ffffff" stroke="#aa95be" stroke-width="1.8"/>
+    <text x="1172" y="314" class="tag" fill="#80649e">LOCAL RECORDS</text>
+    <text x="1172" y="342" class="node-title">Fields, products + application history</text>
+    <text x="1172" y="363" class="node-copy">crop · traits · growth stage · prior applications</text>
+
+    <rect x="1150" y="398" width="366" height="85" rx="13" fill="#ffffff" stroke="#aa95be" stroke-width="1.8"/>
+    <text x="1172" y="426" class="tag" fill="#80649e">FORECAST ADAPTER</text>
+    <text x="1172" y="452" class="node-title">Weather forecast</text>
+    <text x="1172" y="473" class="node-copy">wind · rain · temperature</text>
+
+    <rect x="1150" y="501" width="366" height="111" rx="13" fill="#ffffff" stroke="#aa95be" stroke-width="1.8"/>
+    <text x="1172" y="529" class="tag" fill="#80649e">RETRIEVAL</text>
+    <text x="1172" y="557" class="node-title">EPA labels in Chroma</text>
+    <text x="1172" y="579" class="node-copy">product-filtered semantic retrieval</text>
+    <text x="1172" y="598" class="node-copy">returns relevant label passages and citations</text>
+
+    <rect x="1150" y="630" width="366" height="75" rx="13" fill="#edf5ef" stroke="#72a181" stroke-width="1.8"/>
+    <text x="1172" y="657" class="tag" fill="#4e8064">SIMULATED OUTPUT</text>
+    <rect x="1362" y="641" width="133" height="20" rx="10" fill="#dceadf"/>
+    <text x="1428.5" y="655" class="small" text-anchor="middle">approved plans only</text>
+    <text x="1172" y="685" class="node-title">SQLite work-order record</text>
+  </g>
+
+  <!-- Footer explanation -->
+  <line x1="62" y1="820" x2="1548" y2="820" stroke="#cbd6cf"/>
+  <circle cx="70" cy="851" r="6" fill="#cc8d6b"/>
+  <text x="85" y="855" class="small">interface</text>
+  <circle cx="163" cy="851" r="6" fill="#67a0b5"/>
+  <text x="178" y="855" class="small">workflow</text>
+  <circle cx="256" cy="851" r="6" fill="#9276ae"/>
+  <text x="271" y="855" class="small">data / evidence</text>
+  <text x="1548" y="855" class="small" text-anchor="end">AI drafts and critiques; code checks; a qualified person decides.</text>
+</svg>
