@@ -1,5 +1,6 @@
 import aboutImage from './assets/headshot.png';
 import mriPosterPdf from './assets/mri_poster.pdf';
+import kenoPosterPdf from './assets/keno_poster.pdf';
 import beyondArgentinaImage from './assets/arg.jpg';
 import beyondSoccerImage from './assets/soccer.jpg';
 import beyondSkiImage from './assets/ski.jpg';
@@ -108,12 +109,21 @@ function App() {
   const publications: Publication[] = [
     {
       title: 'In a State to Win?',
-      authors: 'John O\'Donnell, Joseph Rollinson, Joe Schweppes, Pablo Lasarte, Matthew McIntosh',
+      authors: 'John O\'Donnell, Joseph Rollinson, Joe Schwepker, Pablo Lasarte, Matthew McIntosh',
       venue: 'Significance',
       year: '2026',
       badge: 'Journal Article',
       note: 'Vol. 23, Issue 2',
       links: [{ label: 'View article (DOI)', href: 'https://doi.org/10.1093/jrssig/qmag012' }],
+    },
+    {
+      title: 'A Statistical Guide to Winning More in KENO Lottery',
+      authors: 'Joseph Rollinson, Joe Schwepker, John O\'Donnell, Pablo Lasarte, Matthew McIntosh',
+      venue: 'Fall Research Day, University of Missouri',
+      year: '2024',
+      badge: 'Research Poster',
+      note: 'Basis for the Significance article',
+      links: [{ label: 'View poster (PDF)', href: kenoPosterPdf }],
     },
     {
       title: 'Predicting Nicotine Dependence from Multimodal MRI Data',
